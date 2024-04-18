@@ -1,7 +1,17 @@
 package web.entity;
 
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "users")
@@ -10,10 +20,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
+    @Size(min = 2, max = 100, message = "Name must be min 2 and max 100 symbols")
+    @NotBlank(message = "Name is required field")
+    @Pattern(regexp = "[A-Za-z]+", message = "Name must consist only letters")
     private String name;
     @Column
+    @Size(min = 2, max = 150, message = "Lastname must be min 2 and max 150 symbols")
+    @NotBlank(message = "Lastname is required field")
+    @Pattern(regexp = "[A-Za-z]+", message = "Lastname must consist only letters")
     private String lastname;
     @Column
+    @Min(value = 1, message = "Age must be greater than 0")
+    @Max(value = 149, message = "Age must be less than 150")
     private byte age;
 
     public User() {}
@@ -54,5 +72,15 @@ public class User {
 
     public void setAge(byte age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

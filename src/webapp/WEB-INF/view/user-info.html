@@ -12,12 +12,24 @@
     <input type="hidden" th:field="*{id}" id="id">
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name"/>
+    <ul>
+        <li th:each="err : ${#fields.errors('name')}"
+            th:text="${err}" class="error"/>
+    </ul>
     <br><br>
     <label for="lastname">Enter lastname: </label>
     <input type="text" th:field="*{lastname}" id="lastname"/>
+    <ul>
+        <li th:each="err : ${#fields.errors('lastname')}"
+            th:text="${err}" class="error"/>
+    </ul>
     <br><br>
     <label for="age">Enter age: </label>
     <input type="text" th:field="*{age}" id="age"/>
+    <ul>
+        <li th:each="err : ${#fields.errors('age')}"
+            th:text="${err}" class="error"/>
+    </ul>
     <br><br>
     <input type="submit" value="OK"/>
 </form>
